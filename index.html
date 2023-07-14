@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <title>Document</title>
+</head>
+<body>
+  <!--
+<br><br>
+    <input type="file" id="excelFileInput" />
+<button onclick="readExcelFile()">Read Excel File</button>
+<br>
+<br>-->
+<div class="progress-circle-div"> <!--progrees bars-->
+    <div class="progress-circle">
+        <svg class="progress" viewBox="0 0 100 100">
+          <circle class="progress-background" cx="50" cy="50" r="45"></circle>
+          <circle class="progress-bar" cx="50" cy="50" r="45"></circle>
+        </svg>
+        <div class="inner-text">
+          <span class="percentage">0%</span>
+        </div>
+        <div class="title">Chemical yield</div>
+      </div>
+      <div class="progress-circle">
+        <svg class="progress" viewBox="0 0 100 100">
+          <circle class="progress-background" cx="50" cy="50" r="45"></circle>
+          <circle class="progress-bar" cx="50" cy="50" r="45"></circle>
+        </svg>
+        <div class="inner-text">
+          <span class="percentage">0%</span>
+        </div>
+        <div class="title">Isolated Yield</div>
+      </div>
+      <div class="progress-circle">
+        <svg class="progress" viewBox="0 0 100 100">
+          <circle class="progress-background" cx="50" cy="50" r="45"></circle>
+          <circle class="progress-bar" cx="50" cy="50" r="45"></circle>
+        </svg>
+        <div class="inner-text">
+          <span class="percentage">0%</span>
+        </div>
+        <div class="title">Yield Loss</div>
+      </div>
+      <div class="progress-circle">
+        <svg class="progress" viewBox="0 0 100 100">
+          <circle class="progress-background" cx="50" cy="50" r="45"></circle>
+          <circle class="progress-bar" cx="50" cy="50" r="45"></circle>
+        </svg>
+        <div class="inner-text">
+          <span class="percentage">0%</span>
+        </div>
+        <div class="title">Recovery</div>
+      </div>
+      <div class="progress-circle">
+        <svg class="progress" viewBox="0 0 100 100">
+          <circle class="progress-background" cx="50" cy="50" r="45"></circle>
+          <circle class="progress-bar" cx="50" cy="50" r="45"></circle>
+        </svg>
+        <div class="inner-text">
+          <span class="percentage">0%</span>
+        </div>
+        <div class="title">Imp Loss</div>
+      </div>
+      <div class="progress-circle">
+        <svg class="progress" viewBox="0 0 100 100">
+          <circle class="progress-background" cx="50" cy="50" r="45"></circle>
+          <circle class="progress-bar" cx="50" cy="50" r="45"></circle>
+        </svg>
+        <div class="inner-text">
+          <span class="percentage">0%</span>
+        </div>
+        <div class="title">Conversion</div>
+      </div>
+      <div class="progress-circle">
+        <svg class="progress" viewBox="0 0 100 100">
+          <circle class="progress-background" cx="50" cy="50" r="45"></circle>
+          <circle class="progress-bar" cx="50" cy="50" r="45"></circle>
+        </svg>
+        <div class="inner-text">
+          <span class="percentage">0%</span>
+        </div>
+        <div class="title">more options..</div>
+      </div>
+</div>
+<!--popup-->
+
+    <div class="popup-overlay">
+        <div class="popup-dialog">
+          <h3>Popup Title</h3>
+          <div class="checkboxes">
+            <label>
+              <input type="checkbox" name="checkbox1" value="Chemical Yield"> Chemical Yield
+            </label>
+            <label>
+              <input type="checkbox" name="checkbox2" value="Isolated Yield">Isolated Yield
+            </label>
+            <label>
+                <input type="checkbox" name="checkbox3" value="Yield Loss"> Yield Loss
+              </label>
+              <label>
+                <input type="checkbox" name="checkbox4" value="Recovery"> Recovery
+              </label>
+              <label>
+                <input type="checkbox" name="checkbox5" value="Imp Loss"> Imp Loss
+              </label>
+            <!-- Repeat the above code block for each checkbox -->
+          </div>
+          <button class="close-button">Close</button>
+          <br>
+          <button class="close-button" onclick="updateProgressBarValues()">submit</button>
+        </div>
+      </div>
+      <div class="btn-LA">
+      
+       
+        <div class="form-group" >
+          <label>Limiting Agent Mols</label>
+         <input type="text">
+         <button>Calculate</button>
+        </div>
+        <hr>
+        <h5>Conclusions:</h5>
+        <input type="text" style="width: 500px;height: 100px;">
+       
+      </div>
+      <br><br>
+     <hr>
+      <div id="table"></div>
+      <table id="data-table">
+       
+      </table>
+      
+      <table>
+        <thead>
+          <tr>
+            <th>sample</th>
+            <th>sample description</th>
+            <th>sample mass</th>
+            <th>[333]</th>
+            <th>[763]</th>
+            <th>[215]</th>
+            <th>[276]</th>
+            <th>[312]</th>
+            <th>[400]</th>
+            <th>[some acid]</th>
+            <th>[some salt]</th>
+            <th>total</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>2033-1</td>
+            <td>EOR</td>
+            <td>204</td>
+            <td>92</td>
+            <td>0.2</td>
+            <td>1.3</td>
+            <td>2.3</td>
+            <td>0.4</td>
+            <td>2.9</td>
+            <td>0.5</td>
+            <td>0.33</td>
+            <td>99.93</td>
+          </tr>
+          <tr>
+            <td>2033-2</td>
+            <td>aq phase</td>
+            <td>400</td>
+            <td>3</td>
+            <td>1</td>
+            <td>1.1</td>
+            <td>2</td>
+            <td>0.2</td>
+            <td>2</td>
+            <td>0.2</td>
+            <td>0.1</td>
+            <td>9.6</td>
+          </tr>
+          <tr>
+            <td>2033-3</td>
+            <td>ML</td>
+            <td>765</td>
+            <td>3</td>
+            <td>0.04</td>
+            <td>0.09</td>
+            <td>1.1</td>
+            <td>0.2</td>
+            <td>5</td>
+            <td>0</td>
+            <td>0.55</td>
+            <td>9.98</td>
+          </tr>
+          <tr>
+            <td>2033-4</td>
+            <td>DRY</td>
+            <td>68</td>
+            <td>83</td>
+            <td>0.01</td>
+            <td>0.04</td>
+            <td>0.2</td>
+            <td>0.1</td>
+            <td>0.8</td>
+            <td>0.3</td>
+            <td>0.33</td>
+            <td>84.78</td>
+          </tr>
+        </tbody>
+      </table>
+  <br>
+  <button>Add Stream</button>
+  <div class="work-table">
+    <button >Remove </button>
+    <button class="collapsible">Toggle Table</button>
+    <div>
+ 
+      <div class="form-group" >
+        <label>Stream</label>
+       <input type="text">
+      
+      </div>
+      <div class="form-group" >
+        <label>Sample</label>
+       <input type="text">
+      
+      </div>
+      <div class="form-group" >
+        <label>Mass</label>
+       <input type="text">
+   
+      </div>
+     
+    
+    </div>
+    <div class="content">
+      <table >
+        <thead>
+          <tr>
+            <th>Material</th>
+            <th>Type</th>
+            <th>%</th>
+            <th>Weight</th>
+            <th>Mols</th>
+            <th>Yield</th>
+            <th>Chemical</th>
+            <th>isolated</th>
+            <th>yield Loss</th>
+            <th>Imp loss</th>
+            <th>Recovery</th>
+        
+            <!-- Add more checkboxes as needed -->
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>[333]</td>
+            <td>Type 1</td>
+            <td>0.5</td>
+            <td>10</td>
+            <td>0.5</td>
+            <td>0.8</td>
+            <td><input type="checkbox"></td>
+            <td><input type="checkbox"></td>
+            <td><input type="checkbox"></td>
+            <td><input type="checkbox"></td>
+            <td><input type="checkbox"></td>
+          </tr>
+          <tr>
+            <td>[215]</td>
+            <td>Type 1</td>
+            <td>0.5</td>
+            <td>10</td>
+            <td>0.5</td>
+            <td>0.8</td>
+            <td><input type="checkbox"></td>
+            <td><input type="checkbox"></td>
+            <td><input type="checkbox"></td>
+            <td><input type="checkbox"></td>
+            <td><input type="checkbox"></td>
+          </tr>
+          <tr>
+            <td>[276]</td>
+            <td>Type 1</td>
+            <td>0.5</td>
+            <td>10</td>
+            <td>0.5</td>
+            <td>0.8</td>
+            <td><input type="checkbox"></td>
+            <td><input type="checkbox"></td>
+            <td><input type="checkbox"></td>
+            <td><input type="checkbox"></td>
+            <td><input type="checkbox"></td>
+          </tr>
+          <tr>
+            <td>[312]</td>
+            <td>Type 1</td>
+            <td>0.5</td>
+            <td>10</td>
+            <td>0.5</td>
+            <td>0.8</td>
+            <td><input type="checkbox"></td>
+            <td><input type="checkbox"></td>
+            <td><input type="checkbox"></td>
+            <td><input type="checkbox"></td>
+            <td><input type="checkbox"></td>
+          </tr>
+          <tr>
+            <td>[400]</td>
+            <td>Type 1</td>
+            <td>0.5</td>
+            <td>10</td>
+            <td>0.5</td>
+            <td>0.8</td>
+            <td><input type="checkbox"></td>
+            <td><input type="checkbox"></td>
+            <td><input type="checkbox"></td>
+            <td><input type="checkbox"></td>
+            <td><input type="checkbox"></td>
+          </tr>
+          <tr>
+            <td>[some acid]</td>
+            <td>Type 1</td>
+            <td>0.5</td>
+            <td>10</td>
+            <td>0.5</td>
+            <td>0.8</td>
+            <td><input type="checkbox"></td>
+            <td><input type="checkbox"></td>
+            <td><input type="checkbox"></td>
+            <td><input type="checkbox"></td>
+            <td><input type="checkbox"></td>
+          </tr>
+          <tr>
+            <td>[some salt]</td>
+            <td>Type 1</td>
+            <td>0.5</td>
+            <td>10</td>
+            <td>0.5</td>
+            <td>0.8</td>
+            <td><input type="checkbox"></td>
+            <td><input type="checkbox"></td>
+            <td><input type="checkbox"></td>
+            <td><input type="checkbox"></td>
+            <td><input type="checkbox"></td>
+          </tr>
+      
+        </tbody>
+      </table>
+    </div>
+
+  </div>
+  <div class="work-table">
+    <button >Remove </button>
+    <button class="collapsible">Toggle Table</button>
+    <div>
+ 
+      <div class="form-group" >
+        <label>Stream</label>
+       <input type="text">
+      
+      </div>
+      <div class="form-group" >
+        <label>Sample</label>
+       <input type="text">
+      
+      </div>
+      <div class="form-group" >
+        <label>Mass</label>
+       <input type="text">
+   
+      </div>
+     
+    
+    </div>
+    <div class="content">
+      <table >
+        <thead>
+          <tr>
+            <th>Material</th>
+            <th>Type</th>
+            <th>%</th>
+            <th>Weight</th>
+            <th>Mols</th>
+            <th>Yield</th>
+            <th>Chemical</th>
+            <th>isolated</th>
+            <th>yield Loss</th>
+            <th>Imp loss</th>
+            <th>Recovery</th>
+        
+            <!-- Add more checkboxes as needed -->
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>[333]</td>
+            <td>Type 1</td>
+            <td>0.5</td>
+            <td>10</td>
+            <td>0.5</td>
+            <td>0.8</td>
+            <td><input type="checkbox"></td>
+            <td><input type="checkbox"></td>
+            <td><input type="checkbox"></td>
+            <td><input type="checkbox"></td>
+            <td><input type="checkbox"></td>
+          </tr>
+          <tr>
+            <td>[215]</td>
+            <td>Type 1</td>
+            <td>0.5</td>
+            <td>10</td>
+            <td>0.5</td>
+            <td>0.8</td>
+            <td><input type="checkbox"></td>
+            <td><input type="checkbox"></td>
+            <td><input type="checkbox"></td>
+            <td><input type="checkbox"></td>
+            <td><input type="checkbox"></td>
+          </tr>
+          <tr>
+            <td>[276]</td>
+            <td>Type 1</td>
+            <td>0.5</td>
+            <td>10</td>
+            <td>0.5</td>
+            <td>0.8</td>
+            <td><input type="checkbox"></td>
+            <td><input type="checkbox"></td>
+            <td><input type="checkbox"></td>
+            <td><input type="checkbox"></td>
+            <td><input type="checkbox"></td>
+          </tr>
+          <tr>
+            <td>[312]</td>
+            <td>Type 1</td>
+            <td>0.5</td>
+            <td>10</td>
+            <td>0.5</td>
+            <td>0.8</td>
+            <td><input type="checkbox"></td>
+            <td><input type="checkbox"></td>
+            <td><input type="checkbox"></td>
+            <td><input type="checkbox"></td>
+            <td><input type="checkbox"></td>
+          </tr>
+          <tr>
+            <td>[400]</td>
+            <td>Type 1</td>
+            <td>0.5</td>
+            <td>10</td>
+            <td>0.5</td>
+            <td>0.8</td>
+            <td><input type="checkbox"></td>
+            <td><input type="checkbox"></td>
+            <td><input type="checkbox"></td>
+            <td><input type="checkbox"></td>
+            <td><input type="checkbox"></td>
+          </tr>
+          <tr>
+            <td>[some acid]</td>
+            <td>Type 1</td>
+            <td>0.5</td>
+            <td>10</td>
+            <td>0.5</td>
+            <td>0.8</td>
+            <td><input type="checkbox"></td>
+            <td><input type="checkbox"></td>
+            <td><input type="checkbox"></td>
+            <td><input type="checkbox"></td>
+            <td><input type="checkbox"></td>
+          </tr>
+          <tr>
+            <td>[some salt]</td>
+            <td>Type 1</td>
+            <td>0.5</td>
+            <td>10</td>
+            <td>0.5</td>
+            <td>0.8</td>
+            <td><input type="checkbox"></td>
+            <td><input type="checkbox"></td>
+            <td><input type="checkbox"></td>
+            <td><input type="checkbox"></td>
+            <td><input type="checkbox"></td>
+          </tr>
+      
+        </tbody>
+      </table>
+    </div>
+
+  </div>
+  
+  <!---->
+
+<div class="ron">
+    <div ></div>
+    <div ></div>
+    <div ></div>
+    <div ></div>
+    <div ></div>
+</div>
+
+
+  <script src="script.js"></script>
+ <!--<script src="https://unpkg.com/xlsx/dist/xlsx.full.min.js"></script> --> 
+  <script src="xlsx.full.min.js"></script>
+</body>
+</html>
